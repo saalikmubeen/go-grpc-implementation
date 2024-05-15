@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+  postgresDB:
+    image: postgres:14-alpine
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=secret
+      - POSTGRES_DB=simple_bank
+    ports:
+      - "5432:5432"
+    volumes:
+      - data-volume:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d simple_bank"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    # redis:
+    #   image: redis:7-alpine
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URI=postgresql://root:secret@postgresDB:5432/simple_bank?sslmode=disable
+      # - REDIS_ADDRESS=redis:6379
+    depends_on:
+      - postgresDB
+      # - redis
+    # Overwriting the default entrypoint and command in the Dockerfile
+    # so that it will wait for the postgres service to be ready before starting 
+    # the api service.
+    entrypoint: [ "/app/wait-for.sh", "postgresDB:5432", "--", "/app/run_migrations.sh" ]
+    # Overwriting the entrypoint in the docker compose file causes the CMD in the 
+    # Dockerfile to be ignored. So we need to specify the command here.
+    command: ["/app/main"] # this will override the CMD in the Dockerfile
+volumes:
+  data-volume:
+# All services in the docker compose file will run on the same network
+# and thus can communicate with each other using the service name
+# and container name instead of the IP address.
