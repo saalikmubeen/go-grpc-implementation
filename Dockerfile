@@ -15,7 +15,7 @@ RUN go build -o main main.go
 RUN apk --no-cache add curl
 
 # Download and install the migrate tool
-RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz | tar xvz
+# RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz | tar xvz
 
 
 
@@ -27,13 +27,13 @@ WORKDIR /app
 COPY --from=builder /app/main .
 
 # Copy the migrate tool from the previous stage
-COPY --from=builder /app/migrate.linux-amd64 ./migrate
+# COPY --from=builder /app/migrate.linux-amd64 ./migrate
 
 # Till now we have only copied the binary executable file to the container
 # but not the other essential and required files and folders to run 
 # the app like app.en, db/migrations, etc
 COPY app.env .
-COPY ./db/migrations ./migrations
+COPY ./db/migrations ./db/migrations
 
 COPY run_migrations.sh .
 # Make the run_migrations.sh script executable

@@ -44,3 +44,10 @@ token_key:
 	openssl rand -hex 64 | head -c 32
 
 .PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test server mock token_key
+
+
+
+
+# Because it will keep the code clean. Since in this case if we want to remove 
+# some proto files, their corresponding generated golang files will be 
+# gone and removed as well. 

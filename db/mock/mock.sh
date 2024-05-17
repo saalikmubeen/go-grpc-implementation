@@ -2,6 +2,9 @@ go install go.uber.org/mock/mockgen@latest
 mockgen -version
 export PATH=$PATH:$(go env GOPATH)/bin
 
+
+which mockgen
+
 mockgen -help
 # mockgen has two modes of operation: source and reflect.
 

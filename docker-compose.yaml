@@ -42,6 +42,7 @@ services:
     command: ["/app/main"] # this will override the CMD in the Dockerfile
 volumes:
   data-volume:
+
 # All services in the docker compose file will run on the same network
 # and thus can communicate with each other using the service name
 # and container name instead of the IP address.

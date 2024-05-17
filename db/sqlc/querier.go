@@ -33,6 +33,15 @@ type Querier interface {
 	ListTransfers(ctx context.Context, arg ListTransfersParams) ([]Transfer, error)
 	ListUserAccounts(ctx context.Context, arg ListUserAccountsParams) ([]Account, error)
 	UpdateAccount(ctx context.Context, arg UpdateAccountParams) (Account, error)
+	// Note you cannot mix the positional parameters($1, $2, $3) with
+	// named parameters(@set_full_name, @full_name, @set_email
+	// Also sqlc.arg(set_hashed_password) is similar to @set_hashed_password
+	// Using COALESCE function of postgresql to update only the fields that
+	// are provided by the user.
+	// COALESCE function returns the first non-null value from the list of arguments
+	// provided to it.
+	// sqlc.narg is the same as sqlc. arg , but always marks the parameter as nullable.
+	UpdateUser(ctx context.Context, arg UpdateUserParams) (User, error)
 }
 
 var _ Querier = (*Queries)(nil)
