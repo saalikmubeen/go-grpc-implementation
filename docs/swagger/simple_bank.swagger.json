@@ -88,6 +88,40 @@
           "SimpleBankService"
         ]
       }
+    },
+    "/v1/update_user": {
+      "patch": {
+        "summary": "Update user",
+        "description": "Use this API to update user",
+        "operationId": "SimpleBankService_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/update_userUpdateUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/update_userUpdateUserRequest"
+            }
+          }
+        ],
+        "tags": [
+          "SimpleBankService"
+        ]
+      }
     }
   },
   "definitions": {
@@ -177,6 +211,32 @@
             "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
+        }
+      }
+    },
+    "update_userUpdateUserRequest": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "fullName": {
+          "type": "string",
+          "title": "optional is used to make the field optional"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "update_userUpdateUserResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/userUser"
         }
       }
     },

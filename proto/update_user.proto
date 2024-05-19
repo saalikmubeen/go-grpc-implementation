@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package update_user;
+
+import "user.proto";
+
+
+// We would want all the generated GO files to be under the pb package inside the
+// pb directory of the project.
+option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+
+
+message UpdateUserRequest {
+    string username = 1;
+    optional string full_name = 2; // optional is used to make the field optional
+    optional string email = 3;
+    optional string password = 4;
+}
+
+message UpdateUserResponse {
+    user.User user = 1;
+}

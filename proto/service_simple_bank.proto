@@ -25,6 +25,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 import "create_user.proto";
+import "update_user.proto";
 import "login_user.proto";
 
 
@@ -57,6 +58,20 @@ service SimpleBankService {
          description: "Use this API to create a new user";
 			   summary: "Create new user";
       };
+    }
+
+
+    rpc UpdateUser (update_user.UpdateUserRequest) returns (update_user.UpdateUserResponse) {
+
+        option (google.api.http) = {
+            patch: "/v1/update_user"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to update user";
+            summary: "Update user";
+        };
+
     }
 
     rpc LoginUser (login_user.LoginUserRequest) returns (login_user.LoginUserResponse) {
