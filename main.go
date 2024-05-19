@@ -97,15 +97,21 @@ func startHTTPGinServer(config utils.Config, store generated_db.Store) {
 	}
 }
 
-// GRPC Server  (Serves the GRPC calls)
+// ** GRPC Server  (Serves the GRPC calls)
 func startGRPCServer(config utils.Config, store generated_db.Store) {
 	server, err := grpcApi.NewServer(config, store)
 	if err != nil {
 		log.Fatal("cannot create server:", err)
 	}
 
+	// Interceptor:
+	// UnaryInterceptor is a hook to intercept the execution of a unary RPC on the server.
+	// The interceptor is a function that is called by the gRPC server after it receives
+	// the request from the client and before it invokes the service method.
+	grpcLogger := grpc.UnaryInterceptor(grpcApi.GrpcLogger)
+
 	// ** create a new gRPC server
-	grpcServer := grpc.NewServer()
+	grpcServer := grpc.NewServer(grpcLogger)
 
 	// register the service with the gRPC server
 	pb.RegisterSimpleBankServiceServer(grpcServer, server)
@@ -197,10 +203,14 @@ func startHTTPGatewayServer(config utils.Config, store generated_db.Store) {
 		log.Fatalf("Failed to listen for HHTP Gateway Server: %v", err)
 	}
 
+	// HTTP middleware to log the HTTP requests in the terminal for
+	// our HTTP Gateway server.
+	httpHandler := grpcApi.HttpLogger(httpMux)
+
 	log.Printf("STARTING HTTP GATEWAY SERVER ON PORT %s....!", listener.Addr().String())
 	// start the server
 	// bind the port and listener to the gRPC server
-	if err := http.Serve(listener, httpMux); err != nil {
+	if err := http.Serve(listener, httpHandler); err != nil {
 		log.Fatalf("Cannot start HTTP Gateway Server...: %v", err)
 	}
 }
