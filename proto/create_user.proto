@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package create_user;
+
+// specifies the package name for the generated Go code.
+option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+
+
+import "user.proto";
+
+
+message CreateUserRequest {
+    string username = 1;
+    string full_name = 2;
+    string email = 3;
+    string password = 4;
+}
+
+
+message CreateUserResponse {
+  user.User user = 1;
+}

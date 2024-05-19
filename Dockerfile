@@ -12,7 +12,7 @@ COPY . .
 RUN go build -o main main.go
 
 # Install curl as golang:1.22-alpine3.19 does not have curl installed
-RUN apk --no-cache add curl
+# RUN apk --no-cache add curl
 
 # Download and install the migrate tool
 # RUN curl -L https://github.com/golang-migrate/migrate/releases/download/v4.14.1/migrate.linux-amd64.tar.gz | tar xvz
@@ -30,7 +30,7 @@ COPY --from=builder /app/main .
 # COPY --from=builder /app/migrate.linux-amd64 ./migrate
 
 # Till now we have only copied the binary executable file to the container
-# but not the other essential and required files and folders to run 
+# but not the other essential and required files and folders to run
 # the app like app.en, db/migrations, etc
 COPY app.env .
 COPY ./db/migrations ./db/migrations
@@ -42,7 +42,7 @@ RUN chmod +x run_migrations.sh
 
 # https://github.com/eficode/wait-for
 # Copy the wait-for.sh script to the container
-# This script is used to wait for the database or any service to be ready before 
+# This script is used to wait for the database or any service to be ready before
 # running another command or service that depends on it.
 # Usage: ./wait-for.sh <host>:<port> -t <timeout> -- command args
 # Example: ./wait-for.sh postgresDB:5432 -t 30 -- echo "DB is up"
@@ -52,7 +52,7 @@ RUN chmod +x wait-for.sh
 
 
 # TO tell docker that the container listens on this specified port
-EXPOSE 8080 
+EXPOSE 8080 50051
 
 # Default command to run when the container starts
 # RUN DB migrations before starting the app

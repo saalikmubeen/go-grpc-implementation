@@ -26,6 +26,7 @@ type Payload struct {
 func NewPayload(username string, role string, duration time.Duration) (*Payload, error) {
 	tokenID, err := uuid.NewRandom()
 	if err != nil {
+
 		return nil, err
 	}
 

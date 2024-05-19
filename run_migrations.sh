@@ -6,10 +6,10 @@ echo "RUNNING MIGRATIONS......!"
 
 
 # Load the environment variables from the app.env file into the current shell
-# of the dcoker container or into the current container's environment. 
-# This will make the environment variables defined  in the app.env 
+# of the dcoker container or into the current container's environment.
+# This will make the environment variables defined  in the app.env
 # file available to the shell script.
-# But this will overwrite the environment variables defined in the 
+# But this will overwrite the environment variables defined in the
 # docker-compose file or in the Dockerfile if they have the same name.
 # source /app/app.env
 

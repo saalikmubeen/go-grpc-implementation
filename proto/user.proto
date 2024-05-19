@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package user;
+
+
+// specifies the package name for the generated Go code.
+// We would want all the generated GO files  to be under the pb package inside the
+// pb directory of the project.
+option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+
+
+import "google/protobuf/timestamp.proto";
+
+message User {
+  string username = 1;
+  string full_name = 2;
+  string email = 3;
+  google.protobuf.Timestamp password_changed_at = 4;
+  google.protobuf.Timestamp created_at = 5;
+}

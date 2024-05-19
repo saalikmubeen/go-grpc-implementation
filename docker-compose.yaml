@@ -27,6 +27,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+      - "50051:50051"
     environment:
       - DB_URI=postgresql://root:secret@postgresDB:5432/simple_bank?sslmode=disable
       # - REDIS_ADDRESS=redis:6379
@@ -34,12 +35,14 @@ services:
       - postgresDB
       # - redis
     # Overwriting the default entrypoint and command in the Dockerfile
-    # so that it will wait for the postgres service to be ready before starting 
+    # so that it will wait for the postgres service to be ready before starting
     # the api service.
     entrypoint: [ "/app/wait-for.sh", "postgresDB:5432", "--", "/app/run_migrations.sh" ]
-    # Overwriting the entrypoint in the docker compose file causes the CMD in the 
+    # Overwriting the entrypoint in the docker compose file causes the CMD in the
     # Dockerfile to be ignored. So we need to specify the command here.
-    command: ["/app/main"] # this will override the CMD in the Dockerfile
+    command: ["/app/main"] # this will override the CMD in the Dockerfile (for production)
+
+
 volumes:
   data-volume:
 

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package service_simple_bank;
+
+// We would want all the generated GO files  to be under the pb package inside the
+// pb directory of the project.
+option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+
+
+import "google/api/annotations.proto";
+import "create_user.proto";
+
+
+service SimpleBankService {
+    rpc CreateUser (create_user.CreateUserRequest) returns (create_user.CreateUserResponse) {
+
+      // This is the annotation that tells the gRPC Gateway
+      // to map this RPC to a HTTP POST request to /v1/create_user
+      option (google.api.http) = {
+            post: "/v1/create_user"
+            body: "*" // parameters of the request will be send in the body.
+        };
+    }
+}
+
+
