@@ -10,6 +10,8 @@ import (
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2"
 	_ "google.golang.org/grpc/cmd/protoc-gen-go-grpc"
 	_ "google.golang.org/protobuf/cmd/protoc-gen-go"
+
+	_ "github.com/rakyll/statik"
 )
 
 // List of blank imports of the protoc plugins. The reason we
@@ -31,3 +33,5 @@ import (
 
 // Full documentation and usage:
 // https://github.com/grpc-ecosystem/grpc-gateway#usage
+
+// go install github.com/rakyll/statik

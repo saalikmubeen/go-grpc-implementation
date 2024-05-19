@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package login_user;
+
+
+// We would want all the generated GO files  to be under the pb package inside the
+// pb directory of the project.
+option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+
+
+import "user.proto";
+import "google/protobuf/timestamp.proto";
+
+message LoginUserRequest {
+    string username = 1;
+    string password = 2;
+}
+
+message LoginUserResponse {
+    user.User user = 1;
+    string session_id = 2;
+    string access_token = 3;
+    string refresh_token = 4;
+    google.protobuf.Timestamp access_token_expires_at = 5;
+    google.protobuf.Timestamp refresh_token_expires_at = 6;
+}

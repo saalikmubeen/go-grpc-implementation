@@ -35,6 +35,8 @@ COPY --from=builder /app/main .
 COPY app.env .
 COPY ./db/migrations ./db/migrations
 
+COPY ./docs/swagger ./docs/swagger
+
 COPY run_migrations.sh .
 # Make the run_migrations.sh script executable
 RUN chmod +x run_migrations.sh
