@@ -55,6 +55,30 @@
         ]
       }
     },
+    "/v1/hello": {
+      "get": {
+        "summary": "Hello from server",
+        "description": "Use this API to get a hello message from the server",
+        "operationId": "SimpleBankService_HelloFromServer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/helloHelloFromServerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "SimpleBankService"
+        ]
+      }
+    },
     "/v1/login_user": {
       "post": {
         "summary": "Login user",
@@ -147,6 +171,23 @@
       "properties": {
         "user": {
           "$ref": "#/definitions/userUser"
+        }
+      }
+    },
+    "helloHelloFromServerResponse": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "clientIp": {
+          "type": "string"
+        },
+        "userAgent": {
+          "type": "string"
+        },
+        "serverName": {
+          "type": "string"
         }
       }
     },

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package hello;
+
+// We would want all the generated GO files  to be under the pb package inside the
+// pb directory of the project.
+option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+
+
+
+message HelloFromServerResponse {
+  string message = 2;
+  string client_ip = 1;
+  string user_agent = 4;
+  string server_name = 7;
+}
+
+
+message HelloFromServerRequest {
+}

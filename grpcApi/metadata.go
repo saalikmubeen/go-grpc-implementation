@@ -2,6 +2,7 @@ package grpcApi
 
 import (
 	"context"
+	"fmt"
 
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/peer"
@@ -26,6 +27,8 @@ func (server *server) extractMetadata(ctx context.Context) *Metadata {
 
 	// md is of type MD map[string][]string
 	if md, ok := metadata.FromIncomingContext(ctx); ok {
+
+		fmt.Println("metadata: ", md)
 
 		// to get the user agent if the request is coming from an HTTP client
 		if userAgents := md.Get(grpcGatewayUserAgentHeader); len(userAgents) > 0 {

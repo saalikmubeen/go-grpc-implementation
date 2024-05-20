@@ -1,4 +1,4 @@
-DB_URL=postgresql://root:secret@localhost:5432/simple_bank?sslmode=disable
+DB_URL=postgresql://root:secret@postgres12:5432/simple_bank?sslmode=disable
 
 run:
 	nodemon --exec go run main.go --signal SIGTERM
@@ -11,7 +11,7 @@ postgres:
 	docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:12-alpine
 
 mysql:
-	docker run --name mysql8 -p 3306:3306  -e MYSQL_ROOT_PASSWORD=secret -d mysql:8
+	docker run --name mysqlDB -p 3306:3306  -e MYSQL_ROOT_PASSWORD=secret -d mysql:8
 
 createdb:
 	docker exec -it postgres12 createdb --username=root --owner=root simple_bank
@@ -52,7 +52,7 @@ proto:
   # gone and removed as well.
 	rm -f pb/*.go
 
-	export PATH="$PATH:$(go env GOPATH)/bin"
+	export PATH="$ PATH:$(go env GOPATH)/bin"
 
 	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative \
 	--go-grpc_out=pb --go-grpc_opt=paths=source_relative \
@@ -66,4 +66,19 @@ proto:
 evans:
 	evans --host localhost --port 9090 -r repl
 
-.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test server mock token_key proto repl
+
+dockerup:
+	docker-compose up --build
+
+dockerdown:
+	docker-compose down
+
+
+# Run the docker compose file for the load balancer with ngix
+loadbalancerup:
+	docker-compose -f docker-compose-lb.yml up --build
+
+loadbalancerdown:
+	docker-compose -f docker-compose-lb.yml down
+
+.PHONY: postgres createdb dropdb migrateup migratedown migrateup1 migratedown1 sqlc test server mock token_key proto repl evans dockerup dockerdown loadbalancerup loadbalancerdown

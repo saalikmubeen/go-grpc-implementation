@@ -13,13 +13,15 @@ services:
       - data-volume:/var/lib/postgresql/data
     restart: always
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U root -d simple_bank"]
+      test: [ "CMD-SHELL", "pg_isready -U root -d simple_bank" ]
       interval: 10s
       timeout: 5s
       retries: 5
 
-    # redis:
-    #   image: redis:7-alpine
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
 
   api:
     build:
@@ -30,22 +32,29 @@ services:
       - "50051:50051"
     environment:
       - DB_URI=postgresql://root:secret@postgresDB:5432/simple_bank?sslmode=disable
+      - HTTP_SERVER_ADDRESS=:8080
+      - GRPC_SERVER_ADDRESS=:50051
       # - REDIS_ADDRESS=redis:6379
     depends_on:
       - postgresDB
-      # - redis
-    # Overwriting the default entrypoint and command in the Dockerfile
-    # so that it will wait for the postgres service to be ready before starting
-    # the api service.
-    entrypoint: [ "/app/wait-for.sh", "postgresDB:5432", "--", "/app/run_migrations.sh" ]
+      - redis
+      # Overwriting the default entrypoint and command in the Dockerfile
+      # so that it will wait for the postgres service to be ready before starting
+      # the api service.
+    entrypoint:
+      [
+        "/app/wait-for.sh",
+        "postgresDB:5432",
+        "--",
+        "/app/run_migrations.sh"
+      ]
     # Overwriting the entrypoint in the docker compose file causes the CMD in the
     # Dockerfile to be ignored. So we need to specify the command here.
-    command: ["/app/main"] # this will override the CMD in the Dockerfile (for production)
-
+    command: [ "/app/main" ] # this will override the CMD in the Dockerfile (for production)
 
 volumes:
   data-volume:
 
-# All services in the docker compose file will run on the same network
-# and thus can communicate with each other using the service name
-# and container name instead of the IP address.
+    # All services in the docker compose file will run on the same network
+    # and thus can communicate with each other using the service name
+    # and container name instead of the IP address.

@@ -40,6 +40,7 @@ import (
 func runDBMigration(migrationURL string, dbSource string) {
 	migration, err := migrate.New(migrationURL, dbSource)
 	if err != nil {
+		fmt.Println("err", err)
 		log.Fatal("cannot create new migrate instance:", err)
 	}
 

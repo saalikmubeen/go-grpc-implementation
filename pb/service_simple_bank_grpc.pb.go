@@ -19,9 +19,10 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	SimpleBankService_CreateUser_FullMethodName = "/service_simple_bank.SimpleBankService/CreateUser"
-	SimpleBankService_UpdateUser_FullMethodName = "/service_simple_bank.SimpleBankService/UpdateUser"
-	SimpleBankService_LoginUser_FullMethodName  = "/service_simple_bank.SimpleBankService/LoginUser"
+	SimpleBankService_CreateUser_FullMethodName      = "/service_simple_bank.SimpleBankService/CreateUser"
+	SimpleBankService_UpdateUser_FullMethodName      = "/service_simple_bank.SimpleBankService/UpdateUser"
+	SimpleBankService_LoginUser_FullMethodName       = "/service_simple_bank.SimpleBankService/LoginUser"
+	SimpleBankService_HelloFromServer_FullMethodName = "/service_simple_bank.SimpleBankService/HelloFromServer"
 )
 
 // SimpleBankServiceClient is the client API for SimpleBankService service.
@@ -31,6 +32,7 @@ type SimpleBankServiceClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*CreateUserResponse, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 	LoginUser(ctx context.Context, in *LoginUserRequest, opts ...grpc.CallOption) (*LoginUserResponse, error)
+	HelloFromServer(ctx context.Context, in *HelloFromServerRequest, opts ...grpc.CallOption) (*HelloFromServerResponse, error)
 }
 
 type simpleBankServiceClient struct {
@@ -68,6 +70,15 @@ func (c *simpleBankServiceClient) LoginUser(ctx context.Context, in *LoginUserRe
 	return out, nil
 }
 
+func (c *simpleBankServiceClient) HelloFromServer(ctx context.Context, in *HelloFromServerRequest, opts ...grpc.CallOption) (*HelloFromServerResponse, error) {
+	out := new(HelloFromServerResponse)
+	err := c.cc.Invoke(ctx, SimpleBankService_HelloFromServer_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SimpleBankServiceServer is the server API for SimpleBankService service.
 // All implementations must embed UnimplementedSimpleBankServiceServer
 // for forward compatibility
@@ -75,6 +86,7 @@ type SimpleBankServiceServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*CreateUserResponse, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*UpdateUserResponse, error)
 	LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error)
+	HelloFromServer(context.Context, *HelloFromServerRequest) (*HelloFromServerResponse, error)
 	mustEmbedUnimplementedSimpleBankServiceServer()
 }
 
@@ -90,6 +102,9 @@ func (UnimplementedSimpleBankServiceServer) UpdateUser(context.Context, *UpdateU
 }
 func (UnimplementedSimpleBankServiceServer) LoginUser(context.Context, *LoginUserRequest) (*LoginUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method LoginUser not implemented")
+}
+func (UnimplementedSimpleBankServiceServer) HelloFromServer(context.Context, *HelloFromServerRequest) (*HelloFromServerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method HelloFromServer not implemented")
 }
 func (UnimplementedSimpleBankServiceServer) mustEmbedUnimplementedSimpleBankServiceServer() {}
 
@@ -158,6 +173,24 @@ func _SimpleBankService_LoginUser_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SimpleBankService_HelloFromServer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(HelloFromServerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SimpleBankServiceServer).HelloFromServer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SimpleBankService_HelloFromServer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SimpleBankServiceServer).HelloFromServer(ctx, req.(*HelloFromServerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SimpleBankService_ServiceDesc is the grpc.ServiceDesc for SimpleBankService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -176,6 +209,10 @@ var SimpleBankService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "LoginUser",
 			Handler:    _SimpleBankService_LoginUser_Handler,
+		},
+		{
+			MethodName: "HelloFromServer",
+			Handler:    _SimpleBankService_HelloFromServer_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

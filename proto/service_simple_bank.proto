@@ -27,6 +27,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 import "create_user.proto";
 import "update_user.proto";
 import "login_user.proto";
+import "hello.proto";
 
 
 option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
@@ -85,6 +86,20 @@ service SimpleBankService {
           description: "Use this API to login user and get access token & refresh token";
           summary: "Login user";
       };
+
+    }
+
+
+    rpc HelloFromServer (hello.HelloFromServerRequest) returns (hello.HelloFromServerResponse) {
+
+        option (google.api.http) = {
+            get: "/v1/hello"
+        };
+
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            description: "Use this API to get a hello message from the server";
+            summary: "Hello from server";
+        };
 
     }
 
