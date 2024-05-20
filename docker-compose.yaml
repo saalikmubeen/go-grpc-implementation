@@ -18,10 +18,10 @@ services:
       timeout: 5s
       retries: 5
 
-  redis:
-    image: redis:7-alpine
-    ports:
-      - "6379:6379"
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
 
   api:
     build:
@@ -37,7 +37,7 @@ services:
       # - REDIS_ADDRESS=redis:6379
     depends_on:
       - postgresDB
-      - redis
+      # - redis
       # Overwriting the default entrypoint and command in the Dockerfile
       # so that it will wait for the postgres service to be ready before starting
       # the api service.
