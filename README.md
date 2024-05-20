@@ -37,15 +37,15 @@ The project consists of the following 3 kinds of servers:
 
 ### 2. gRPC Server
 
--`Description`: Implements gRPC services for remote procedure calls.
--`Functionality`: Handles gRPC client requests directly, providing efficient communication between client and server.
--`Purpose`: Facilitates high-performance, bidirectional communication between client and server.
+- `Description`: Implements gRPC services for remote procedure calls.
+- `Functionality`: Handles gRPC client requests directly, providing efficient communication between client and server.
+- `Purpose`: Facilitates high-performance, bidirectional communication between client and server.
 
 ### 3.gRPC Gateway Server
 
--`Description`: An HTTP server that acts as a gateway for HTTP clients to communicate with the gRPC server.
--`Functionality`: Receives HTTP requests from clients and translates them into gRPC calls, forwarding them to the appropriate gRPC handlers.
--`Purpose`: Enables HTTP clients to interact seamlessly with the gRPC server, expanding compatibility and usability.
+- `Description`: An HTTP server that acts as a gateway for HTTP clients to communicate with the gRPC server.
+- `Functionality`: Receives HTTP requests from clients and translates them into gRPC calls, forwarding them to the appropriate gRPC handlers.
+- `Purpose`: Enables HTTP clients to interact seamlessly with the gRPC server, expanding compatibility and usability.
 
 
 By following this architecture, developers can seamlessly switch between running the server as a `standalone HTTP Gin server` or as `a gRPC server with an HTTP Gateway server serving both gRPC and HTTP clients at the same time`. NGINX ensures efficient load balancing and distribution of incoming requests, enhancing the scalability and reliability of the  architecture.
@@ -91,7 +91,7 @@ git git@github.com:saalikmubeen/go-grpc-implementation.git
 
 ## Manual
 
-If you aren't a docker person, ([Please learn docker 🥲](https://www.docker.com/why-docker))
+**`If you aren't a docker person`**, ([Please learn docker 🥲](https://www.docker.com/why-docker))
 
 cd into root project
 
