@@ -9,8 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/lib/pq"
-	generated_db "github.com/saalikmubeen/backend-masterclass-go/db/sqlc"
-	"github.com/saalikmubeen/backend-masterclass-go/utils"
+	generated_db "github.com/saalikmubeen/go-grpc-implementation/db/sqlc"
+	"github.com/saalikmubeen/go-grpc-implementation/utils"
 )
 
 type createUserRequest struct {

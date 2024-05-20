@@ -3,7 +3,7 @@ syntax = "proto3";
 package create_user;
 
 // specifies the package name for the generated Go code.
-option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+option go_package = "github.com/saalikmubeen/go-grpc-implementation/pb;pb";
 
 
 import "user.proto";

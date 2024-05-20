@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/saalikmubeen/backend-masterclass-go/utils"
+	"github.com/saalikmubeen/go-grpc-implementation/utils"
 	"github.com/stretchr/testify/require"
 )
 

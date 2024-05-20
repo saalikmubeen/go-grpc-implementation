@@ -8,7 +8,7 @@ import (
 
 	_ "github.com/lib/pq"
 
-	"github.com/saalikmubeen/backend-masterclass-go/utils"
+	"github.com/saalikmubeen/go-grpc-implementation/utils"
 )
 
 var testQueries *Queries

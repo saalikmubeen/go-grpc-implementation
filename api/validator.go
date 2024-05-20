@@ -2,7 +2,7 @@ package api
 
 import (
 	"github.com/go-playground/validator/v10"
-	"github.com/saalikmubeen/backend-masterclass-go/utils"
+	"github.com/saalikmubeen/go-grpc-implementation/utils"
 )
 
 var validCurrency validator.Func = func(fieldLevel validator.FieldLevel) bool {

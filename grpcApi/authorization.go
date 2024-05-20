@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/saalikmubeen/backend-masterclass-go/authToken"
+	"github.com/saalikmubeen/go-grpc-implementation/authToken"
 	"google.golang.org/grpc/metadata"
 )
 

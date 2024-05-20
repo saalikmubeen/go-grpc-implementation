@@ -1,4 +1,4 @@
-module github.com/saalikmubeen/backend-masterclass-go
+module github.com/saalikmubeen/go-grpc-implementation
 
 go 1.21.4
 

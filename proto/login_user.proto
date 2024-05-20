@@ -5,7 +5,7 @@ package login_user;
 
 // We would want all the generated GO files  to be under the pb package inside the
 // pb directory of the project.
-option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+option go_package = "github.com/saalikmubeen/go-grpc-implementation/pb;pb";
 
 
 import "user.proto";

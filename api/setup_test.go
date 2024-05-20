@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	generated_db "github.com/saalikmubeen/backend-masterclass-go/db/sqlc"
-	"github.com/saalikmubeen/backend-masterclass-go/utils"
+	generated_db "github.com/saalikmubeen/go-grpc-implementation/db/sqlc"
+	"github.com/saalikmubeen/go-grpc-implementation/utils"
 	"github.com/stretchr/testify/require"
 )
 

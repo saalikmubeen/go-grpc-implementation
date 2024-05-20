@@ -7,8 +7,8 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/lib/pq"
-	"github.com/saalikmubeen/backend-masterclass-go/authToken"
-	generated_db "github.com/saalikmubeen/backend-masterclass-go/db/sqlc"
+	"github.com/saalikmubeen/go-grpc-implementation/authToken"
+	generated_db "github.com/saalikmubeen/go-grpc-implementation/db/sqlc"
 )
 
 type createAccountRequest struct {

@@ -1,8 +1,8 @@
 package grpcApi
 
 import (
-	generated_db "github.com/saalikmubeen/backend-masterclass-go/db/sqlc"
-	"github.com/saalikmubeen/backend-masterclass-go/pb"
+	generated_db "github.com/saalikmubeen/go-grpc-implementation/db/sqlc"
+	"github.com/saalikmubeen/go-grpc-implementation/pb"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 

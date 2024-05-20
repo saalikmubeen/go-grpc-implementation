@@ -6,9 +6,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
 	"github.com/go-playground/validator/v10"
-	"github.com/saalikmubeen/backend-masterclass-go/authToken"
-	generated_db "github.com/saalikmubeen/backend-masterclass-go/db/sqlc"
-	"github.com/saalikmubeen/backend-masterclass-go/utils"
+	"github.com/saalikmubeen/go-grpc-implementation/authToken"
+	generated_db "github.com/saalikmubeen/go-grpc-implementation/db/sqlc"
+	"github.com/saalikmubeen/go-grpc-implementation/utils"
 )
 
 // Server serves HTTP requests for our banking service.

@@ -4,7 +4,7 @@ package service_simple_bank;
 
 // We would want all the generated GO files  to be under the pb package inside the
 // pb directory of the project.
-option go_package = "github.com/saalikmubeen/backend-masterclass-go/pb;pb";
+option go_package = "github.com/saalikmubeen/go-grpc-implementation/pb;pb";
 
 
 
@@ -36,7 +36,7 @@ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
 		version: "1.2";
 		contact: {
 			name: "Tech School";
-			url: "https://github.com/saalikmubeen/backend-masterclass-go";
+			url: "https://github.com/saalikmubeen/go-grpc-implementation";
 			email: "saalikmubeen@gmail.com";
 		};
 	};

@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/saalikmubeen/backend-masterclass-go/authToken"
+	"github.com/saalikmubeen/go-grpc-implementation/authToken"
 )
 
 const (

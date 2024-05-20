@@ -3,11 +3,11 @@ package grpcApi
 import (
 	"fmt"
 
-	"github.com/saalikmubeen/backend-masterclass-go/authToken"
-	"github.com/saalikmubeen/backend-masterclass-go/pb"
-	"github.com/saalikmubeen/backend-masterclass-go/utils"
+	"github.com/saalikmubeen/go-grpc-implementation/authToken"
+	"github.com/saalikmubeen/go-grpc-implementation/pb"
+	"github.com/saalikmubeen/go-grpc-implementation/utils"
 
-	generated_db "github.com/saalikmubeen/backend-masterclass-go/db/sqlc"
+	generated_db "github.com/saalikmubeen/go-grpc-implementation/db/sqlc"
 )
 
 // Server serves gRPC requests
