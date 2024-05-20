@@ -102,8 +102,8 @@ services:
       dockerfile: Dockerfile
     restart: always
     ports:
-      - "3050:80"
-      - "9090:9090"
+      - "3050:80" # For load balancing of the HTTP Gateway server
+      - "9090:9090" # For load balancing of the gRPC server
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     depends_on:
