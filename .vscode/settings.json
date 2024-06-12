@@ -1,7 +1,12 @@
 {
-    "protoc": {
-        "options": [
-            "--proto_path=${workspaceRoot}/proto"
-        ]
-    }
+  // By default, the vscode-proto3 extension uses our current working folder as the proto_path
+  // when it runs the protoc for code analysis. So it looks for .proto files in the current
+  // working folder. If you have your .proto files in a different folder, you can specify the
+  // proto_path in the settings.json file.
+  "protoc": {
+    "path": "/opt/homebrew/bin/protoc",
+    "options": [
+      "--proto_path=proto"
+    ]
+  }
 }

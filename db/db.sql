@@ -1,6 +1,6 @@
- 
- 
- -- The following query may be helpful to see what processes are blocking 
+
+
+ -- The following query may be helpful to see what processes are blocking
  -- SQL statements (these only find row-level locks, not object-level locks).
  SELECT blocked_locks.pid     AS blocked_pid,
          blocked_activity.usename  AS blocked_user,
@@ -10,7 +10,7 @@
          blocking_activity.query   AS current_statement_in_blocking_process
    FROM  pg_catalog.pg_locks         blocked_locks
     JOIN pg_catalog.pg_stat_activity blocked_activity  ON blocked_activity.pid = blocked_locks.pid
-    JOIN pg_catalog.pg_locks         blocking_locks 
+    JOIN pg_catalog.pg_locks         blocking_locks
         ON blocking_locks.locktype = blocked_locks.locktype
         AND blocking_locks.database IS NOT DISTINCT FROM blocked_locks.database
         AND blocking_locks.relation IS NOT DISTINCT FROM blocked_locks.relation
@@ -28,7 +28,8 @@
 
 
 -- Allows us to list all the locks that are currently held by active connections.
-SELECT   
+SELECT
+         a.datname
          a.application_name,
          a.datname,
          l.relation::regclass,
@@ -43,7 +44,8 @@ SELECT
          a.pid
 FROM pg_stat_activity a
 JOIN pg_locks l ON l.pid = a.pid
+-- WHERE a.application_name = 'psql'
 ORDER BY a.query_start; -- or whatever you want to order by like a.pid
- 
- 
+
+
  -- This query will show you the current locks that are held by active connections.
