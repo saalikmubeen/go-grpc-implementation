@@ -41,7 +41,7 @@ The project consists of the following 3 kinds of servers:
 - `Functionality`: Handles gRPC client requests directly, providing efficient communication between client and server.
 - `Purpose`: Facilitates high-performance, bidirectional communication between client and server.
 
-### 3.gRPC Gateway Server
+### 3. gRPC Gateway Server
 
 - `Description`: An HTTP server that acts as a gateway for HTTP clients to communicate with the gRPC server.
 - `Functionality`: Receives HTTP requests from clients and translates them into gRPC calls, forwarding them to the appropriate gRPC handlers.

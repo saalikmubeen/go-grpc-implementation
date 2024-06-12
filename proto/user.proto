@@ -6,6 +6,10 @@ package user;
 // specifies the package name for the generated Go code.
 // We would want all the generated GO files  to be under the pb package inside the
 // pb directory of the project.
+// "github.com/saalikmubeen/go-grpc-implementation/pb;pb":
+// github.com/saalikmubeen/go-grpc-implementation/pb is the folder where
+// gnerated code will be stored
+// and pb will be the go pacakge name of the generated code.
 option go_package = "github.com/saalikmubeen/go-grpc-implementation/pb;pb";
 
 
